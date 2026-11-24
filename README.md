@@ -15,13 +15,13 @@
 
 1. **Subconverter 订阅转换模板（开箱即用）**
    ```
-   https://raw.githubusercontent.com/Reid-Vin/Proxy-Rules-Factory/main/dist/Reid_Vin_Pro.ini
+   https://raw.githubusercontent.com/beiyu1024/Proxy-Rules-Factory/main/dist/Beiyu_Pro.ini
    ```
    直接替换订阅转换链接中的 `config=` 参数即可（建议 URL 编码）。
 
 2. **Mihomo 原生 `.mrs` 二进制规则集模板（极客热更新版）**
    ```
-   https://raw.githubusercontent.com/Reid-Vin/Proxy-Rules-Factory/main/dist/mihomo_mrs.yaml
+   https://raw.githubusercontent.com/beiyu1024/Proxy-Rules-Factory/main/dist/mihomo_mrs.yaml
    ```
    客户端每 24 小时自动热更新社区 `.mrs` 规则与本仓库私有规则，无需重新转换订阅。
 

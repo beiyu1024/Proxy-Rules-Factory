@@ -9,7 +9,7 @@
 # 顺序即优先级！严格遵循：
 #   私有保护 -> 广告/OTA 拦截 -> 细分专项(AI/流媒体/通信/开发学术) -> 大型平台(父域) -> 国内大厂/媒体 -> GFW -> 国内兜底 -> 全球兜底
 
-repo_owner: Reid-Vin
+repo_owner: beiyu1024
 repo_name: Proxy-Rules-Factory
 repo_branch: main
 

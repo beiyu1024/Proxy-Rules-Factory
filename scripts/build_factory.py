@@ -8,7 +8,7 @@ Proxy-Rules-Factory 核心自动化构建与治理引擎
 4. 按严格业务优先级执行【全局跨组去重 + 精确冲突消除 + 同组父域覆盖子域精简 + 跨组父域遮蔽检测】。
 5. 自动输出：
    - dist/rules/*.list        （干净、零冲突、单文件严控 < 500KB 绝不被 subconverter 截断）
-   - dist/Reid_Vin_Pro.ini    （完美兼容 subconverter 的终极模板，300s 合理测速、全正则防假节点、防空组退化）
+   - dist/Beiyu_Pro.ini       （完美兼容 subconverter 的终极模板，300s 合理测速、全正则防假节点、防空组退化）
    - dist/mihomo_mrs.yaml     （Mihomo 原生 .mrs 二进制 rule-providers 现代覆写模板，客户端 24h 热更新）
    - dist/AUDIT.md            （透明自动化审计报告）
 """
@@ -238,7 +238,7 @@ def build_ini_template(cfg: dict, group_files: List[Tuple[dict, int]]) -> str:
         "; ------------------ 节点自动测速与地区分组（300s 合理间隔 / 50ms 容差，排除信息假节点） ------------------",
         f"custom_proxy_group=♻️ 自动选择`url-test`{valid_node_regex}`http://www.gstatic.com/generate_204`300,,50",
         f"custom_proxy_group=🔯 故障转移`fallback`{valid_node_regex}`http://www.gstatic.com/generate_204`300,,50",
-        "custom_proxy_group=🔒 私人节点`url-test`(Reid|reid|Vin|vin|XiaoChen|xiaochen)`http://www.gstatic.com/generate_204`300,,50",
+        "custom_proxy_group=🔒 私人节点`url-test`(Beiyu|beiyu|82345679)`http://www.gstatic.com/generate_204`300,,50",
         "custom_proxy_group=🇭🇰 香港节点`url-test`(港|HK|hk|Hong Kong|HongKong)`http://www.gstatic.com/generate_204`300,,50",
         "custom_proxy_group=🇹🇼 台湾节点`url-test`(台|新北|彰化|TW|tw|Taiwan|湾)`http://www.gstatic.com/generate_204`300,,50",
         "custom_proxy_group=🇯🇵 日本节点`url-test`(日本|川日|东京|大阪|泉日|埼玉|沪日|深日|JP|jp|Japan)`http://www.gstatic.com/generate_204`300,,50",
@@ -509,9 +509,9 @@ def main() -> int:
         total_shadow_dropped += shadow_drop
         stats.append((gname, gid, len(final_rules), out_bytes, dup_in_grp, conflict_drop, shadow_drop))
 
-    # 3. 输出 dist/Reid_Vin_Pro.ini
+    # 3. 输出 dist/Beiyu_Pro.ini
     ini_text = build_ini_template(sources_cfg, group_files)
-    (DIST_DIR / "Reid_Vin_Pro.ini").write_text(ini_text, encoding="utf-8")
+    (DIST_DIR / "Beiyu_Pro.ini").write_text(ini_text, encoding="utf-8")
 
     # 4. 输出 dist/mihomo_mrs.yaml
     mrs_text = build_mihomo_mrs_template(sources_cfg, group_files)

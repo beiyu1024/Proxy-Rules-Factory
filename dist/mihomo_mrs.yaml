@@ -1,4 +1,4 @@
-# Mihomo 原生 .mrs 二进制规则集模板 (Generated: 2026-11-24 07:25 UTC)
+# Mihomo 原生 .mrs 二进制规则集模板 (Generated: 2026-11-24 11:58 UTC)
 # 规则每 24 小时由 Mihomo 内核自动从 MetaCubeX/meta-rules-dat 与本仓库热更新，无需重新转换订阅。
 # 可直接用于 Clash Verge Rev / Mihomo Party / OpenClash 覆写脚本。
 
@@ -7,7 +7,7 @@ rule-providers:
     type: http
     behavior: classical
     format: text
-    url: https://raw.githubusercontent.com/Reid-Vin/Proxy-Rules-Factory/main/dist/rules/lan.list
+    url: https://raw.githubusercontent.com/beiyu1024/Proxy-Rules-Factory/main/dist/rules/lan.list
     path: ./rule_provider/own_lan.list
     interval: 86400
   mrs_gs_private:
@@ -28,28 +28,28 @@ rule-providers:
     type: http
     behavior: classical
     format: text
-    url: https://raw.githubusercontent.com/Reid-Vin/Proxy-Rules-Factory/main/dist/rules/private_direct.list
+    url: https://raw.githubusercontent.com/beiyu1024/Proxy-Rules-Factory/main/dist/rules/private_direct.list
     path: ./rule_provider/own_private_direct.list
     interval: 86400
   own_dynamic_direct:
     type: http
     behavior: classical
     format: text
-    url: https://raw.githubusercontent.com/Reid-Vin/Proxy-Rules-Factory/main/dist/rules/dynamic_direct.list
+    url: https://raw.githubusercontent.com/beiyu1024/Proxy-Rules-Factory/main/dist/rules/dynamic_direct.list
     path: ./rule_provider/own_dynamic_direct.list
     interval: 86400
   own_dynamic_proxy:
     type: http
     behavior: classical
     format: text
-    url: https://raw.githubusercontent.com/Reid-Vin/Proxy-Rules-Factory/main/dist/rules/dynamic_proxy.list
+    url: https://raw.githubusercontent.com/beiyu1024/Proxy-Rules-Factory/main/dist/rules/dynamic_proxy.list
     path: ./rule_provider/own_dynamic_proxy.list
     interval: 86400
   own_foreign_dns:
     type: http
     behavior: classical
     format: text
-    url: https://raw.githubusercontent.com/Reid-Vin/Proxy-Rules-Factory/main/dist/rules/foreign_dns.list
+    url: https://raw.githubusercontent.com/beiyu1024/Proxy-Rules-Factory/main/dist/rules/foreign_dns.list
     path: ./rule_provider/own_foreign_dns.list
     interval: 86400
   mrs_awavenue_ads:
@@ -63,7 +63,7 @@ rule-providers:
     type: http
     behavior: classical
     format: text
-    url: https://raw.githubusercontent.com/Reid-Vin/Proxy-Rules-Factory/main/dist/rules/apple_ota.list
+    url: https://raw.githubusercontent.com/beiyu1024/Proxy-Rules-Factory/main/dist/rules/apple_ota.list
     path: ./rule_provider/own_apple_ota.list
     interval: 86400
   mrs_gs_openai:
@@ -119,7 +119,7 @@ rule-providers:
     type: http
     behavior: classical
     format: text
-    url: https://raw.githubusercontent.com/Reid-Vin/Proxy-Rules-Factory/main/dist/rules/ai_copilot.list
+    url: https://raw.githubusercontent.com/beiyu1024/Proxy-Rules-Factory/main/dist/rules/ai_copilot.list
     path: ./rule_provider/own_ai_copilot.list
     interval: 86400
   mrs_gs_bing:
@@ -133,7 +133,7 @@ rule-providers:
     type: http
     behavior: classical
     format: text
-    url: https://raw.githubusercontent.com/Reid-Vin/Proxy-Rules-Factory/main/dist/rules/google_voice.list
+    url: https://raw.githubusercontent.com/beiyu1024/Proxy-Rules-Factory/main/dist/rules/google_voice.list
     path: ./rule_provider/own_google_voice.list
     interval: 86400
   mrs_gs_youtube:
@@ -217,7 +217,7 @@ rule-providers:
     type: http
     behavior: classical
     format: text
-    url: https://raw.githubusercontent.com/Reid-Vin/Proxy-Rules-Factory/main/dist/rules/bili_intl.list
+    url: https://raw.githubusercontent.com/beiyu1024/Proxy-Rules-Factory/main/dist/rules/bili_intl.list
     path: ./rule_provider/own_bili_intl.list
     interval: 86400
   mrs_gs_bilibili_at_not_cn:
@@ -259,7 +259,7 @@ rule-providers:
     type: http
     behavior: classical
     format: text
-    url: https://raw.githubusercontent.com/Reid-Vin/Proxy-Rules-Factory/main/dist/rules/apple_cn.list
+    url: https://raw.githubusercontent.com/beiyu1024/Proxy-Rules-Factory/main/dist/rules/apple_cn.list
     path: ./rule_provider/own_apple_cn.list
     interval: 86400
   mrs_gs_apple-cn:
@@ -273,7 +273,7 @@ rule-providers:
     type: http
     behavior: classical
     format: text
-    url: https://raw.githubusercontent.com/Reid-Vin/Proxy-Rules-Factory/main/dist/rules/microsoft_cn.list
+    url: https://raw.githubusercontent.com/beiyu1024/Proxy-Rules-Factory/main/dist/rules/microsoft_cn.list
     path: ./rule_provider/own_microsoft_cn.list
     interval: 86400
   mrs_gs_microsoft_at_cn:
@@ -350,7 +350,7 @@ rule-providers:
     type: http
     behavior: classical
     format: text
-    url: https://raw.githubusercontent.com/Reid-Vin/Proxy-Rules-Factory/main/dist/rules/cn_media.list
+    url: https://raw.githubusercontent.com/beiyu1024/Proxy-Rules-Factory/main/dist/rules/cn_media.list
     path: ./rule_provider/own_cn_media.list
     interval: 86400
   mrs_gs_bilibili:
