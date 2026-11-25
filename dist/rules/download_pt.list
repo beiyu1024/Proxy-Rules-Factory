@@ -1,6 +1,6 @@
 # Group: 📥 下载服务 (download_pt)
-# Updated: 2026-11-24 12:02 UTC
-# Rules: 479 (raw=554, local_dup=65, cross_conflict=0, parent_shadow=10)
+# Updated: 2026-11-25 03:24 UTC
+# Rules: 475 (raw=549, local_dup=64, cross_conflict=0, parent_shadow=10)
 
 DOMAIN,004430.xyz
 DOMAIN,0123456789nonexistent.com
@@ -101,7 +101,6 @@ DOMAIN,inferno.demonoid.is
 DOMAIN,ipv4.rer.lol
 DOMAIN,ipv4.tracker.harry.lu
 DOMAIN,ipv4announce.sktorrent.eu
-DOMAIN,ipv6.govt.hu
 DOMAIN,irrenhaus.dyndns.dk
 DOMAIN,isk.richardsw.club
 DOMAIN,jutone.com
@@ -224,7 +223,6 @@ DOMAIN,tr.highstar.shop
 DOMAIN,tr.kxmp.cf
 DOMAIN,tr.nyacat.pw
 DOMAIN,tr.zukizuki.org
-DOMAIN,tr3.ysagin.top
 DOMAIN,tr4ck3r.duckdns.org
 DOMAIN,track3r.site
 DOMAIN,tracker-de.ololosh.space
@@ -315,7 +313,6 @@ DOMAIN,tracker.ixuexi.click
 DOMAIN,tracker.jamesthebard.net
 DOMAIN,tracker.jdx3.org
 DOMAIN,tracker.jiesen.life
-DOMAIN,tracker.k.vu
 DOMAIN,tracker.kamigami.org
 DOMAIN,tracker.ktxp.com
 DOMAIN,tracker.kuroy.me
@@ -447,7 +444,6 @@ DOMAIN,xtremewrestlingtorrents.net
 DOMAIN,y.paranoid.agency
 DOMAIN,y.t-1.org
 DOMAIN,yolo.liberbear.com
-DOMAIN,yuptracker-eu.gaijinent.com
 DOMAIN,z.paranoid.agency
 DOMAIN,zupix.online
 DOMAIN-SUFFIX,all4nothin.net
