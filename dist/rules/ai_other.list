@@ -1,6 +1,6 @@
 # Group: 🤖 Claude & AI (ai_other)
-# Updated: 2026-11-26 02:41 UTC
-# Rules: 147 (raw=480, local_dup=251, cross_conflict=78, parent_shadow=4)
+# Updated: 2026-11-26 11:10 UTC
+# Rules: 147 (group_total=147, raw=480, local_dup=251, cross_conflict=78, parent_shadow=4)
 
 DOMAIN,api.together.xyz
 DOMAIN,copilot-proxy.githubusercontent.com

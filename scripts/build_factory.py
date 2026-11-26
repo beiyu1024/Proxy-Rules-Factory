@@ -8,7 +8,7 @@ Proxy-Rules-Factory 核心自动化构建与治理引擎
 4. 按严格业务优先级执行【全局跨组去重 + 精确冲突消除 + 同组父域覆盖子域精简 + 跨组父域遮蔽检测】。
 5. 自动输出：
    - dist/rules/*.list        （干净、零冲突、单文件严控 < 500KB 绝不被 subconverter 截断）
-   - dist/Beiyu_Pro.ini       （完美兼容 subconverter 的终极模板，300s 合理测速、全正则防假节点、防空组退化）
+   - dist/Beiyu_Pro.ini    （完美兼容 subconverter 的终极模板，300s 合理测速、全正则防假节点、防空组退化）
    - dist/mihomo_mrs.yaml     （Mihomo 原生 .mrs 二进制 rule-providers 现代覆写模板，客户端 24h 热更新）
    - dist/AUDIT.md            （透明自动化审计报告）
 """
@@ -92,6 +92,11 @@ def parse_line(raw: str) -> Tuple[str, str, List[str]] | None:
             except ValueError:
                 return None
             extras = ["no-resolve"]
+        elif rtype == "IP-ASN":
+            if not val.isdigit():
+                return None
+            # 必须补齐 no-resolve，否则在 Fake-IP 模式下会触发客户端本地 DNS 提前解析导致泄漏
+            extras = ["no-resolve"]
         elif rtype in ("DOMAIN", "DOMAIN-SUFFIX", "DOMAIN-KEYWORD"):
             val = val.lower().lstrip(".")
             if not val or " " in val:
@@ -152,7 +157,7 @@ def parent_suffixes(domain: str, include_self: bool) -> List[str]:
     return res
 
 
-def build_ini_template(cfg: dict, group_files: List[Tuple[dict, int]]) -> str:
+def build_ini_template(cfg: dict, group_files: List[Tuple[dict, List[str]]]) -> str:
     owner = cfg["repo_owner"]
     repo = cfg["repo_name"]
     branch = cfg["repo_branch"]
@@ -167,20 +172,21 @@ def build_ini_template(cfg: dict, group_files: List[Tuple[dict, int]]) -> str:
         "[custom]",
         "; =====================================================================",
         f"; Proxy-Rules-Factory 自动生成分流模板 (Generated: {datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M UTC')})",
-        "; 特点：零冲突 / 零父域杀子域 / 零体积截断 / 300s 合理测速 / 全正则防假节点 / 防空组退化",
+        "; 特点：零冲突 / 零父域杀子域 / 零体积截断 / 零 Fake-IP DNS 泄漏 / 300s 合理测速 / 防空组退化",
         "; =====================================================================",
         "",
         "; ------------------ 分流规则集（严格按优先级从细到粗排列） ------------------",
     ]
 
-    for grp, count in group_files:
-        if count == 0:
+    for grp, fnames in group_files:
+        if not fnames:
             continue
-        lines.append(f"ruleset={grp['name']},{raw_base}/{grp['id']}.list")
+        for fname in fnames:
+            lines.append(f"ruleset={grp['name']},{raw_base}/{fname}")
 
-    # 国内外终极兜底（GEOIP,CN 放最后 MATCH 前，不加 no-resolve；OpenClash 旁路由同时叠加 GEOSITE,cn 加速）
+    # 国内外终极兜底（强制携带 no-resolve，配合前序全量国内域名分片，彻底杜绝 Fake-IP 提前本地解析引发 DNS 泄漏）
     lines.extend([
-        "ruleset=📞 国内IP段,[]GEOIP,CN",
+        "ruleset=📞 国内IP段,[]GEOIP,CN,no-resolve",
         "ruleset=🐟 漏网之鱼,[]FINAL",
         "",
         "; ------------------ 业务策略组（安全默认项，杜绝空地区组退化直连） ------------------",
@@ -203,9 +209,9 @@ def build_ini_template(cfg: dict, group_files: List[Tuple[dict, int]]) -> str:
     )
 
     emitted_groups = {"☑️ 节点选择", "🏠 局域服务", "🎯 直连服务", "❌ 拒绝请求"}
-    for grp, count in group_files:
+    for grp, fnames in group_files:
         gname = grp["name"]
-        if gname in emitted_groups or count == 0:
+        if gname in emitted_groups or not fnames:
             continue
         emitted_groups.add(gname)
         dt = grp.get("default_target", "☑️ 节点选择")
@@ -259,7 +265,7 @@ def build_ini_template(cfg: dict, group_files: List[Tuple[dict, int]]) -> str:
     return "\n".join(lines)
 
 
-def build_mihomo_mrs_template(cfg: dict, group_files: List[Tuple[dict, int]]) -> str:
+def build_mihomo_mrs_template(cfg: dict, group_files: List[Tuple[dict, List[str]]]) -> str:
     """生成 Mihomo 原生 .mrs 二进制 rule-providers 现代模板（客户端每 24h 自动热更新社区最新规则）。"""
     owner = cfg["repo_owner"]
     repo = cfg["repo_name"]
@@ -271,8 +277,8 @@ def build_mihomo_mrs_template(cfg: dict, group_files: List[Tuple[dict, int]]) ->
     rules = []
 
     # 先放个人/自定义私有规则（classical text）+ MetaCubeX .mrs 二进制规则
-    for grp, count in group_files:
-        if count == 0:
+    for grp, fnames in group_files:
+        if not fnames or grp["id"] == "cn_domain":
             continue
         gid = grp["id"]
         gname = grp["name"]
@@ -282,16 +288,18 @@ def build_mihomo_mrs_template(cfg: dict, group_files: List[Tuple[dict, int]]) ->
 
         # 私有/自定义规则（或无 .mrs 对应的组）使用本仓库清洗后的 .list
         if grp.get("custom_key") or (not mrs_gs and not mrs_gi and not mrs_extra):
-            pname = f"own_{gid}"
-            providers[pname] = {
-                "type": "http",
-                "behavior": "classical",
-                "format": "text",
-                "url": f"{own_base}/{gid}.list",
-                "path": f"./rule_provider/{pname}.list",
-                "interval": 86400,
-            }
-            rules.append(f"RULE-SET,{pname},{gname}")
+            for idx, fname in enumerate(fnames):
+                pname = f"own_{gid}" if len(fnames) == 1 else f"own_{gid}_{idx + 1}"
+                providers[pname] = {
+                    "type": "http",
+                    "behavior": "classical",
+                    "format": "text",
+                    "url": f"{own_base}/{fname}",
+                    "path": f"./rule_provider/{pname}.list",
+                    "interval": 86400,
+                }
+                extra_nr = ",no-resolve" if gid in ("lan", "private_direct", "foreign_dns", "ai_openai") else ""
+                rules.append(f"RULE-SET,{pname},{gname}{extra_nr}")
 
         for extra in mrs_extra:
             pname = extra["name"]
@@ -350,7 +358,7 @@ def build_mihomo_mrs_template(cfg: dict, group_files: List[Tuple[dict, int]]) ->
         "interval": 86400,
     }
     rules.append("RULE-SET,mrs_gs_cn,🎯 直连服务")
-    rules.append("RULE-SET,mrs_gi_cn,📞 国内IP段")  # 不带 no-resolve，确保冷门国内域名也可解析判定直连
+    rules.append("RULE-SET,mrs_gi_cn,📞 国内IP段,no-resolve")  # 必须带 no-resolve，严禁触发客户端本地 DNS 泄漏
     rules.append("MATCH,🐟 漏网之鱼")
 
     doc = {
@@ -483,31 +491,52 @@ def main() -> int:
         type_order = {"DOMAIN": 0, "DOMAIN-SUFFIX": 1, "DOMAIN-KEYWORD": 2, "IP-CIDR": 3, "IP-CIDR6": 4, "IP-ASN": 5, "DST-PORT": 6}
         final_rules.sort(key=lambda s: (type_order.get(s.split(",", 1)[0], 9), s))
 
-        out_file = RULES_OUT_DIR / f"{gid}.list"
-        header = [
-            f"# Group: {gname} ({gid})",
-            f"# Updated: {datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}",
-            f"# Rules: {len(final_rules)} (raw={raw_valid}, local_dup={dup_in_grp}, cross_conflict={conflict_drop}, parent_shadow={shadow_drop})",
-            "",
-        ]
-        content = "\n".join(header + final_rules) + "\n"
-        out_bytes = len(content.encode("utf-8"))
-        if out_bytes > MAX_SINGLE_LIST_BYTES:
-            print(
-                f"ERROR: {out_file.name} size {out_bytes} bytes exceeds safe subconverter limit ({MAX_SINGLE_LIST_BYTES} bytes)!",
-                file=sys.stderr,
-            )
-            return 1
+        now_utc = datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M UTC')
+        safe_shard_bytes = 450 * 1024
+        shards: List[List[str]] = []
+        if final_rules:
+            shards = [[]]
+            cur_bytes = 256
+            for rule_line in final_rules:
+                rbytes = len((rule_line + "\n").encode("utf-8"))
+                if shards[-1] and cur_bytes + rbytes > safe_shard_bytes:
+                    shards.append([])
+                    cur_bytes = 256
+                shards[-1].append(rule_line)
+                cur_bytes += rbytes
 
-        out_file.write_text(content, encoding="utf-8")
-        group_files.append((grp, len(final_rules)))
+        emitted_fnames: List[str] = []
+        total_out_bytes = 0
+        for sidx, shard_rules in enumerate(shards, 1):
+            fname = f"{gid}.list" if len(shards) == 1 else f"{gid}_{sidx}.list"
+            out_file = RULES_OUT_DIR / fname
+            shard_tag = "" if len(shards) == 1 else f" [part {sidx}/{len(shards)}]"
+            header = [
+                f"# Group: {gname} ({gid}){shard_tag}",
+                f"# Updated: {now_utc}",
+                f"# Rules: {len(shard_rules)} (group_total={len(final_rules)}, raw={raw_valid}, local_dup={dup_in_grp}, cross_conflict={conflict_drop}, parent_shadow={shadow_drop})",
+                "",
+            ]
+            content = "\n".join(header + shard_rules) + "\n"
+            out_bytes = len(content.encode("utf-8"))
+            if out_bytes > MAX_SINGLE_LIST_BYTES:
+                print(
+                    f"ERROR: {out_file.name} size {out_bytes} bytes exceeds safe subconverter limit ({MAX_SINGLE_LIST_BYTES} bytes)!",
+                    file=sys.stderr,
+                )
+                return 1
+            out_file.write_text(content, encoding="utf-8")
+            emitted_fnames.append(fname)
+            total_out_bytes += out_bytes
+
+        group_files.append((grp, emitted_fnames))
 
         total_raw += raw_valid
         total_final += len(final_rules)
         total_dup_dropped += dup_in_grp
         total_conflict_dropped += conflict_drop
         total_shadow_dropped += shadow_drop
-        stats.append((gname, gid, len(final_rules), out_bytes, dup_in_grp, conflict_drop, shadow_drop))
+        stats.append((gname, gid, ", ".join(emitted_fnames), len(final_rules), total_out_bytes, dup_in_grp, conflict_drop, shadow_drop))
 
     # 3. 输出 dist/Beiyu_Pro.ini
     ini_text = build_ini_template(sources_cfg, group_files)
@@ -532,9 +561,9 @@ def main() -> int:
         "| 优先级 | 策略组 | 文件 | 输出规则数 | 体积 | 组内去重 | 跨组冲突清理 | 父域遮蔽清理 |",
         "|---:|---|---|---:|---:|---:|---:|---:|",
     ]
-    for idx, (gname, gid, cnt, bsz, d1, d2, d3) in enumerate(stats, 1):
+    for idx, (gname, gid, fname_str, cnt, bsz, d1, d2, d3) in enumerate(stats, 1):
         kb = f"{bsz/1024:.1f} KB"
-        audit_lines.append(f"| {idx} | {gname} | `dist/rules/{gid}.list` | {cnt} | {kb} | {d1} | {d2} | {d3} |")
+        audit_lines.append(f"| {idx} | {gname} | `dist/rules/{fname_str}` | {cnt} | {kb} | {d1} | {d2} | {d3} |")
 
     if shadow_samples:
         audit_lines.extend([

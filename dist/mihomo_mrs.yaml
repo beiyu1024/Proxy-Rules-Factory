@@ -1,4 +1,4 @@
-# Mihomo 原生 .mrs 二进制规则集模板 (Generated: 2026-11-26 02:41 UTC)
+# Mihomo 原生 .mrs 二进制规则集模板 (Generated: 2026-11-26 11:10 UTC)
 # 规则每 24 小时由 Mihomo 内核自动从 MetaCubeX/meta-rules-dat 与本仓库热更新，无需重新转换订阅。
 # 可直接用于 Clash Verge Rev / Mihomo Party / OpenClash 覆写脚本。
 
@@ -536,13 +536,13 @@ rule-providers:
     path: ./rule_provider/mrs_gi_cn.mrs
     interval: 86400
 rules:
-- RULE-SET,own_lan,🏠 局域服务
+- RULE-SET,own_lan,🏠 局域服务,no-resolve
 - RULE-SET,mrs_gs_private,🏠 局域服务
 - RULE-SET,mrs_gi_private,🏠 局域服务,no-resolve
-- RULE-SET,own_private_direct,🤓 私人服务
+- RULE-SET,own_private_direct,🤓 私人服务,no-resolve
 - RULE-SET,own_dynamic_direct,🚁 动态直连
 - RULE-SET,own_dynamic_proxy,🚻 动态代理
-- RULE-SET,own_foreign_dns,☎️ 国外-DNS
+- RULE-SET,own_foreign_dns,☎️ 国外-DNS,no-resolve
 - RULE-SET,mrs_awavenue_ads,🛡️ 广告拦截
 - RULE-SET,own_apple_ota,⬆️ 苹果升级
 - RULE-SET,mrs_gs_openai,🤖 OpenAI
@@ -611,5 +611,5 @@ rules:
 - RULE-SET,mrs_gs_gfw,🧱 防火长城
 - RULE-SET,mrs_gs_category-social-media-not_cn,🧱 防火长城
 - RULE-SET,mrs_gs_cn,🎯 直连服务
-- RULE-SET,mrs_gi_cn,📞 国内IP段
+- RULE-SET,mrs_gi_cn,📞 国内IP段,no-resolve
 - MATCH,🐟 漏网之鱼

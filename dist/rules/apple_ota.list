@@ -1,6 +1,6 @@
 # Group: ⬆️ 苹果升级 (apple_ota)
-# Updated: 2026-11-26 02:41 UTC
-# Rules: 78 (raw=78, local_dup=0, cross_conflict=0, parent_shadow=0)
+# Updated: 2026-11-26 11:10 UTC
+# Rules: 78 (group_total=78, raw=78, local_dup=0, cross_conflict=0, parent_shadow=0)
 
 DOMAIN,appldnld-cdn.apple.com.akadns.net
 DOMAIN,appldnld-cdn.origin-apple.com.akadns.net

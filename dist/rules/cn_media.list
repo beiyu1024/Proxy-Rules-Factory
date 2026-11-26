@@ -1,6 +1,6 @@
 # Group: 📺 国内媒体 (cn_media)
-# Updated: 2026-11-26 02:41 UTC
-# Rules: 1547 (raw=1819, local_dup=217, cross_conflict=55, parent_shadow=0)
+# Updated: 2026-11-26 11:10 UTC
+# Rules: 1547 (group_total=1547, raw=1819, local_dup=217, cross_conflict=55, parent_shadow=0)
 
 DOMAIN,bytedance.map.fastly.net
 DOMAIN,s1.hdslb.com.w.kunlunar.com

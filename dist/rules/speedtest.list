@@ -1,6 +1,6 @@
 # Group: 📶 网络测速 (speedtest)
-# Updated: 2026-11-26 02:41 UTC
-# Rules: 19 (raw=20, local_dup=0, cross_conflict=0, parent_shadow=1)
+# Updated: 2026-11-26 11:10 UTC
+# Rules: 19 (group_total=19, raw=20, local_dup=0, cross_conflict=0, parent_shadow=1)
 
 DOMAIN-SUFFIX,cdnst.net
 DOMAIN-SUFFIX,cellmaps.com

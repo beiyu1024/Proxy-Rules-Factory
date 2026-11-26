@@ -1,6 +1,6 @@
 # Group: 📱 GV号服务 (google_voice)
-# Updated: 2026-11-26 02:41 UTC
-# Rules: 4 (raw=4, local_dup=0, cross_conflict=0, parent_shadow=0)
+# Updated: 2026-11-26 11:10 UTC
+# Rules: 4 (group_total=4, raw=4, local_dup=0, cross_conflict=0, parent_shadow=0)
 
 DOMAIN,lens.l.google.com
 DOMAIN-SUFFIX,clients6.google.com

@@ -1,6 +1,6 @@
 # Group: 🍎 苹果直连 (apple_cn)
-# Updated: 2026-11-26 02:41 UTC
-# Rules: 150 (raw=167, local_dup=2, cross_conflict=11, parent_shadow=4)
+# Updated: 2026-11-26 11:10 UTC
+# Rules: 150 (group_total=150, raw=167, local_dup=2, cross_conflict=11, parent_shadow=4)
 
 DOMAIN,a1.mzstatic.com
 DOMAIN,a2.mzstatic.com

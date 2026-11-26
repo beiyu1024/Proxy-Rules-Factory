@@ -1,6 +1,6 @@
 # Group: 🕊️ 推特代理 (twitter)
-# Updated: 2026-11-26 02:41 UTC
-# Rules: 24 (raw=24, local_dup=0, cross_conflict=0, parent_shadow=0)
+# Updated: 2026-11-26 11:10 UTC
+# Rules: 24 (group_total=24, raw=24, local_dup=0, cross_conflict=0, parent_shadow=0)
 
 DOMAIN-SUFFIX,ads-twitter.com
 DOMAIN-SUFFIX,cms-twdigitalassets.com

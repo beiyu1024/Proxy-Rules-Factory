@@ -305,3 +305,10 @@ groups:
       - https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/gfw.txt
       - https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/gfw.list
       - https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-social-media-!cn.list
+
+  # ==================== 第 8 层：国内全量域名兜底（自动分片 <450KB，避免 Fake-IP 误代） ====================
+  - id: cn_domain
+    name: "📞 国内服务"
+    default_target: "🎯 直连服务"
+    sources:
+      - https://raw.githubusercontent.com/Reid-Vin/OpenClash_Custom_Rules_for_ios_rule_script/refs/heads/main/Clash/Ruleset/China-Domain.list

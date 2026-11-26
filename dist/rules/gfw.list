@@ -1,6 +1,6 @@
 # Group: 🧱 防火长城 (gfw)
-# Updated: 2026-11-26 02:41 UTC
-# Rules: 4455 (raw=14051, local_dup=9028, cross_conflict=540, parent_shadow=28)
+# Updated: 2026-11-26 11:10 UTC
+# Rules: 4453 (group_total=4453, raw=14051, local_dup=9028, cross_conflict=542, parent_shadow=28)
 
 DOMAIN,e122475.dscg.akamaiedge.net
 DOMAIN,licdn.cn.cdn20.com
@@ -2116,7 +2116,6 @@ DOMAIN-SUFFIX,iphone4hongkong.com
 DOMAIN-SUFFIX,iphonetaiwan.org
 DOMAIN-SUFFIX,iphonix.fr
 DOMAIN-SUFFIX,ipicture.ru
-DOMAIN-SUFFIX,ipify.org
 DOMAIN-SUFFIX,ipjetable.net
 DOMAIN-SUFFIX,iportal.me
 DOMAIN-SUFFIX,ippotv.com
@@ -4160,7 +4159,6 @@ DOMAIN-SUFFIX,wheelockslatin.com
 DOMAIN-SUFFIX,whereiswerner.com
 DOMAIN-SUFFIX,wheretowatch.com
 DOMAIN-SUFFIX,whispersystems.org
-DOMAIN-SUFFIX,whoer.net
 DOMAIN-SUFFIX,whyfacebook.com
 DOMAIN-SUFFIX,whyx.org
 DOMAIN-SUFFIX,wiki.gamerp.jp
