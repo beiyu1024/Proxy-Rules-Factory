@@ -1,9 +1,9 @@
 # Proxy-Rules-Factory 自动构建审计报告
 
-- **构建时间**：`2026-11-27 02:41:05 UTC`
-- **上游原始规则总量**：`138251` 条
-- **清洗后输出规则总量**：`123025` 条（零重复、零冲突、零死规则、零超限截断）
-- **自动清理统计**：组内冗余 `11514` 条 ｜ 跨组精确冲突 `3608` 条 ｜ 跨组父域遮蔽 `104` 条
+- **构建时间**：`2026-11-28 02:31:04 UTC`
+- **上游原始规则总量**：`138257` 条
+- **清洗后输出规则总量**：`123029` 条（零重复、零冲突、零死规则、零超限截断）
+- **自动清理统计**：组内冗余 `11516` 条 ｜ 跨组精确冲突 `3608` 条 ｜ 跨组父域遮蔽 `104` 条
 
 ## 各业务分组产出明细（按优先级从高到低）
 
@@ -35,13 +35,13 @@
 | 24 | 💻 开发与学术 | `dist/rules/dev_scholar.list` | 1438 | 41.6 KB | 92 | 28 | 0 |
 | 25 | 🔎 谷歌服务 | `dist/rules/google.list` | 657 | 17.8 KB | 102 | 320 | 0 |
 | 26 | 🍎 苹果服务 | `dist/rules/apple.list` | 1389 | 43.4 KB | 83 | 195 | 1 |
-| 27 | Ⓜ️ 微软服务 | `dist/rules/microsoft.list` | 381 | 11.4 KB | 27 | 351 | 0 |
+| 27 | Ⓜ️ 微软服务 | `dist/rules/microsoft.list` | 382 | 11.4 KB | 27 | 351 | 0 |
 | 28 | 📺 国内媒体 | `dist/rules/cn_media.list` | 1547 | 42.4 KB | 217 | 55 | 0 |
 | 29 | 🇨🇳 国内常用 | `dist/rules/cn_common.list` | 1148 | 31.4 KB | 257 | 11 | 0 |
 | 30 | 🎮 国内游戏 | `dist/rules/cn_games.list` | 36 | 1.3 KB | 19 | 1 | 0 |
 | 31 | 📶 网络测速 | `dist/rules/speedtest.list` | 19 | 0.7 KB | 0 | 0 | 1 |
-| 32 | 📥 下载服务 | `dist/rules/download_pt.list` | 476 | 12.2 KB | 65 | 0 | 10 |
-| 33 | 🧱 防火长城 | `dist/rules/gfw.list` | 4453 | 121.1 KB | 9028 | 542 | 28 |
+| 32 | 📥 下载服务 | `dist/rules/download_pt.list` | 476 | 12.2 KB | 64 | 0 | 10 |
+| 33 | 🧱 防火长城 | `dist/rules/gfw.list` | 4456 | 121.2 KB | 9031 | 542 | 28 |
 | 34 | 📞 国内服务 | `dist/rules/cn_domain_1.list, cn_domain_2.list, cn_domain_3.list, cn_domain_4.list, cn_domain_5.list, cn_domain_6.list, cn_domain_7.list` | 107450 | 2793.3 KB | 6 | 2008 | 49 |
 
 ## 跨组父域遮蔽自动清理样本（前 25 条）

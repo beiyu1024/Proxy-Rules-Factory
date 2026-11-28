@@ -1,7 +1,8 @@
 # Group: Ⓜ️ 微软服务 (microsoft)
-# Updated: 2026-11-27 02:41 UTC
-# Rules: 381 (group_total=381, raw=759, local_dup=27, cross_conflict=351, parent_shadow=0)
+# Updated: 2026-11-28 02:31 UTC
+# Rules: 382 (group_total=382, raw=760, local_dup=27, cross_conflict=351, parent_shadow=0)
 
+DOMAIN,aurora-customization-usw2.lithium.com
 DOMAIN,img-prod-cms-rt-microsoft-com.akamaized.net
 DOMAIN,img-s-msn-com.akamaized.net
 DOMAIN,mwf-service.akamaized.net
